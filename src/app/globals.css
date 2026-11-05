@@ -11,6 +11,16 @@
   --lavender: #c9b7dd;
   --bright: #f4eefb;
   --ember: #ff9b52;
+  /* Stacked project decks (see ChapterSection). */
+  --deck-top: 104px;
+  --deck-peek: 84px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --deck-top: 46vh;
+    --deck-peek: 64px;
+  }
 }
 
 @theme inline {

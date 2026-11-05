@@ -13,7 +13,8 @@ export interface SphereLayout {
 
 export function sphereLayout(width: number, height: number): SphereLayout {
   if (width < 768) {
-    return { cx: width * 0.5, cy: height * 0.3, radius: Math.min(width * 0.36, height * 0.2) };
+    // Phones: the visual owns the top of the screen; content lands below it.
+    return { cx: width * 0.5, cy: height * 0.23, radius: Math.min(width * 0.34, height * 0.15) };
   }
   return { cx: width * 0.66, cy: height * 0.5, radius: Math.min(height * 0.33, width * 0.24) };
 }

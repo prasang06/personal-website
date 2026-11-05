@@ -21,7 +21,7 @@ export default function AboutSection() {
       className="relative px-4 pt-[40vh] pb-24 sm:px-8 md:pt-[6vh]"
     >
       <div className="max-w-xl md:w-[46%] md:max-w-none lg:w-[40%]">
-        <div aria-hidden="true" data-snap={140} data-landing="about" />
+        <div aria-hidden="true" data-snap={140} data-snap-mobile="44vh" data-landing="about" />
         <p className="text-xs tracking-[0.25em] text-muted">-- / NOW</p>
         <h2
           id="about-heading"

@@ -8,5 +8,6 @@ export const now = {
     "Coursework deep-dives: open quantum systems and spin glasses.",
   ],
   /** Shown as a call to action under the list. */
-  availability: "Open to research internships in quantum computing and scientific ML.",
+  availability:
+    "Incoming Quantum Engineer Intern at Accelequant. Also open to research internships in quantum computing and scientific ML.",
 };

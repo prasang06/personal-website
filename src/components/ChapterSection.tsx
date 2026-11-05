@@ -20,10 +20,18 @@ interface ChapterSectionProps {
   morphTo?: string;
 }
 
-/** Where the first stacked card pins, below the fixed nav and the deck label (px). */
+/**
+ * Where the first stacked card pins and how much of each earlier card stays
+ * visible above the next. Desktop pins near the top beside the canvas; phones
+ * pin below the canvas visual, which owns the top of the screen. Keep in sync
+ * with --deck-top / --deck-peek in globals.css.
+ */
 const DECK_TOP = 104;
-/** How much of each earlier card stays visible above the next (px). */
 const DECK_PEEK = 84;
+const DECK_TOP_MOBILE = "46vh";
+const DECK_PEEK_MOBILE = 64;
+/** Heading landings: desktop px, phones below the visual. */
+const HEADING_MOBILE = "44vh";
 
 /** A chapter's editorial column: content sits left, the canvas visual right. */
 export default function ChapterSection({
@@ -48,7 +56,12 @@ export default function ChapterSection({
       className="relative px-4 pt-[45vh] pb-32 sm:px-8 md:pt-[30vh]"
     >
       <div className="max-w-xl md:w-[46%] md:max-w-none lg:w-[40%]">
-        <div aria-hidden="true" data-snap={headingLanding} data-landing={id} />
+        <div
+          aria-hidden="true"
+          data-snap={headingLanding}
+          data-snap-mobile={HEADING_MOBILE}
+          data-landing={id}
+        />
         <p className="text-xs tracking-[0.25em] text-muted">
           {index} / {label.toUpperCase()}
         </p>
@@ -71,20 +84,22 @@ export default function ChapterSection({
             header visible. Markers record each card's resting position so the
             scroll can land on it (see SmoothScroll). */}
         <div className="relative mt-16">
-          <h3 className="sticky top-16 z-10 bg-gradient-to-b from-void via-void to-transparent pt-3 pb-4 text-[10px] tracking-[0.25em] text-muted">
+          <h3 className="sticky top-[calc(var(--deck-top)-40px)] z-10 bg-gradient-to-b from-void via-void to-transparent pt-3 pb-4 text-[10px] tracking-[0.25em] text-muted">
             SELECTED WORK
           </h3>
           {featured.map((p, i) => {
             const top = DECK_TOP + i * DECK_PEEK;
+            const topMobile = `${DECK_TOP_MOBILE}+${i * DECK_PEEK_MOBILE}`;
             return (
               <Fragment key={p.id}>
                 <div
                   aria-hidden="true"
                   data-snap={top}
+                  data-snap-mobile={topMobile}
                   data-stage-from={morphTo && i === 0 ? morphTo : undefined}
                   data-stage-to={morphTo && i === featured.length - 1 ? morphTo : undefined}
                 />
-                <div className="sticky" style={{ top }}>
+                <div className="sticky" style={{ top: `calc(var(--deck-top) + ${i} * var(--deck-peek))` }}>
                   <ProjectCard project={p} index={i} />
                 </div>
                 {/* Scroll room while this card is the newest on the stack. Spacers,

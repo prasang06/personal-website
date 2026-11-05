@@ -4,7 +4,9 @@
  * the content whatever its height.
  *
  * Markers:
- * - `[data-snap="<px>"]`: a resting point; the marker lands <px> below the viewport top.
+ * - `[data-snap="<offset>"]`: a resting point; the marker lands <offset> below the
+ *   viewport top. Offsets are px, `vh`, or a sum such as `46vh+64`.
+ *   `data-snap-mobile` overrides it below 768px wide.
  * - `[data-landing="<id>"]`: a named resting point (also a `data-snap` marker).
  * - `[data-stage-from="<stage>"]` / `[data-stage-to="<stage>"]`: where a canvas stage
  *   starts forming and is fully formed.
@@ -16,10 +18,25 @@ export const MORPH_SPAN = 1.8;
 /** Seconds a full magnet glide takes; shorter hops scale down. */
 export const MAGNET_DURATION = 2.4;
 
+/** Pixel offset for a snap value such as `140`, `44vh` or `46vh+64`. */
+function parseOffset(value: string | undefined): number {
+  if (!value) return 0;
+  return value.split("+").reduce((sum, part) => {
+    const v = part.trim();
+    return sum + (v.endsWith("vh") ? (parseFloat(v) / 100) * window.innerHeight : Number(v) || 0);
+  }, 0);
+}
+
+/** How far below the viewport top a marker should land. */
+export function snapOffset(el: HTMLElement): number {
+  const mobile = window.innerWidth < 768 && el.dataset.snapMobile !== undefined;
+  return parseOffset(mobile ? el.dataset.snapMobile : el.dataset.snap);
+}
+
 /** Scroll position at which a marker element lands. */
 export function markerY(el: HTMLElement | null): number | null {
   if (!el) return null;
-  return el.getBoundingClientRect().top + window.scrollY - Number(el.dataset.snap ?? 0);
+  return el.getBoundingClientRect().top + window.scrollY - snapOffset(el);
 }
 
 const landing = (id: string) => markerY(document.querySelector(`[data-landing="${id}"]`));

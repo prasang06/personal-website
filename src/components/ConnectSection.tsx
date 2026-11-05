@@ -6,7 +6,7 @@ export default function ConnectSection() {
     { label: "GITHUB", href: profile.links.github, text: "github.com/prasang06" },
     { label: "LINKEDIN", href: profile.links.linkedin, text: "linkedin.com/in/prasang0" },
     ...profile.links.emails.map((e, i) => ({
-      label: i === 0 ? "EMAIL" : "EMAIL / IITH",
+      label: i === 0 ? "EMAIL" : "IITH",
       href: `mailto:${e}`,
       text: e,
     })),
@@ -20,7 +20,7 @@ export default function ConnectSection() {
       className="relative flex min-h-dvh flex-col items-center justify-center px-4 pt-[30vh] pb-32 text-center sm:px-8"
     >
       <div className="w-full max-w-xl">
-        <div aria-hidden="true" data-snap={140} data-landing="connect" />
+        <div aria-hidden="true" data-snap={140} data-snap-mobile="44vh" data-landing="connect" />
         <p className="text-xs tracking-[0.25em] text-muted">05 / CONNECT</p>
         <h2
           id="connect-heading"

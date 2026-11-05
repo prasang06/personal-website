@@ -15,6 +15,12 @@ export const timeline: TimelineEntry[] = [
     kind: "education",
   },
   {
+    when: "Upcoming",
+    title: "Quantum Engineer Intern, Accelequant India Pvt. Ltd.",
+    detail: "Quantum-classical optimisation.",
+    kind: "research",
+  },
+  {
     when: "Ongoing",
     title: "Undergraduate Research Assistant, IIT Hyderabad",
     detail:
