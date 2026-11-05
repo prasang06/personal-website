@@ -36,22 +36,22 @@ export const timeline: TimelineEntry[] = [
     kind: "leadership",
   },
   {
-    when: "Aug 2026",
+    when: "Jul 2026",
     title: "IBM Qiskit Global Summer School 2026",
     detail: "Quantum Excellence badge (Advanced). Ran error-mitigated circuits on IBM hardware.",
     kind: "achievement",
+  },
+  {
+    when: "Aug 2026",
+    title: "Honors in Physics",
+    detail: "Approved alongside the B.Tech in Engineering Physics.",
+    kind: "education",
   },
   {
     when: "Oct 2026",
     title: "Qiskit Fall Fest 2026, IIT Hyderabad",
     detail: "Organising team: workshops, hackathon and speaker sessions.",
     kind: "event",
-  },
-  {
-    when: "2026",
-    title: "Honors in Physics",
-    detail: "Alongside the B.Tech in Engineering Physics.",
-    kind: "education",
   },
   {
     when: "Current",
