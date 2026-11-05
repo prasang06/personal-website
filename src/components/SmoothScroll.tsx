@@ -4,7 +4,13 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import Snap from "lenis/snap";
 import "lenis/dist/lenis.css";
-import { MAGNET_DURATION, MORPH_SPAN, markerY, readChoreography } from "@/animations/timeline";
+import {
+  MAGNET_DURATION,
+  MORPH_SPAN,
+  isRestingPoint,
+  markerY,
+  readChoreography,
+} from "@/animations/timeline";
 
 /**
  * Smooth wheel scrolling with soft landings: when scrolling stops close to a
@@ -91,9 +97,9 @@ export default function SmoothScroll() {
     let removers: (() => void)[] = [];
     const placeSnaps = () => {
       removers.forEach((remove) => remove());
-      const markers = Array.from(document.querySelectorAll<HTMLElement>("[data-snap]")).map(
-        (el) => markerY(el) ?? 0,
-      );
+      const markers = Array.from(document.querySelectorAll<HTMLElement>("[data-snap]"))
+        .filter(isRestingPoint)
+        .map((el) => markerY(el) ?? 0);
       removers = [0, ...markers].map((y) => snap.add(Math.round(y)));
     };
     placeSnaps();

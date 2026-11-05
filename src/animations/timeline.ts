@@ -6,7 +6,8 @@
  * Markers:
  * - `[data-snap="<offset>"]`: a resting point; the marker lands <offset> below the
  *   viewport top. Offsets are px, `vh`, or a sum such as `46vh+64`.
- *   `data-snap-mobile` overrides it below 768px wide.
+ *   `data-snap-mobile` overrides it below 768px wide; `none` there means the
+ *   marker is not a resting point on phones (it still times canvas stages).
  * - `[data-landing="<id>"]`: a named resting point (also a `data-snap` marker).
  * - `[data-stage-from="<stage>"]` / `[data-stage-to="<stage>"]`: where a canvas stage
  *   starts forming and is fully formed.
@@ -27,10 +28,18 @@ function parseOffset(value: string | undefined): number {
   }, 0);
 }
 
+const mobileValue = (el: HTMLElement) =>
+  window.innerWidth < 768 ? el.dataset.snapMobile : undefined;
+
+/** Whether the scroll should come to rest on this marker at the current width. */
+export function isRestingPoint(el: HTMLElement): boolean {
+  return mobileValue(el) !== "none";
+}
+
 /** How far below the viewport top a marker should land. */
 export function snapOffset(el: HTMLElement): number {
-  const mobile = window.innerWidth < 768 && el.dataset.snapMobile !== undefined;
-  return parseOffset(mobile ? el.dataset.snapMobile : el.dataset.snap);
+  const mobile = mobileValue(el);
+  return parseOffset(mobile !== undefined && mobile !== "none" ? mobile : el.dataset.snap);
 }
 
 /** Scroll position at which a marker element lands. */

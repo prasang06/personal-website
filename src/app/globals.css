@@ -16,12 +16,6 @@
   --deck-peek: 84px;
 }
 
-@media (max-width: 767px) {
-  :root {
-    --deck-top: 40vh;
-    --deck-peek: 80px;
-  }
-}
 
 @theme inline {
   --color-void: var(--void);

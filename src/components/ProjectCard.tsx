@@ -17,7 +17,6 @@ export default function ProjectCard({ project, index }: { project: Project; inde
 
   return (
     <article className="group relative border-t border-plum/70 bg-void py-5 shadow-[0_-12px_32px_-8px_rgb(11_2_22)] focus-within:bg-[#140427] hover:bg-[#140427] sm:px-4 sm:py-6">
-      <input type="checkbox" id={toggleId} className="sr-only" aria-label={`Show details for ${project.title}`} />
       <header className="flex items-baseline justify-between gap-4 text-[10px] tracking-[0.2em] text-muted">
         <span>
           {String(index + 1).padStart(2, "0")} / {STATUS_LABEL[project.status]}
@@ -53,10 +52,10 @@ export default function ProjectCard({ project, index }: { project: Project; inde
         </ul>
         <span className="ml-auto flex gap-4">
           {/* Touch screens have no hover: tap to expand instead. */}
-          <label
-            htmlFor={toggleId}
-            className="hidden cursor-pointer text-lavender hover:text-bright [@media(hover:none)]:inline"
-          >
+          {/* The checkbox lives inside the label so focusing it on tap can't
+              scroll the page up to the top of the card. */}
+          <label className="relative hidden cursor-pointer text-lavender hover:text-bright [@media(hover:none)]:inline">
+            <input type="checkbox" id={toggleId} className="sr-only" aria-label={`Show details for ${project.title}`} />
             <span className="group-has-[:checked]:hidden">[ + DETAILS ]</span>
             <span className="hidden group-has-[:checked]:inline">[ - LESS ]</span>
           </label>
