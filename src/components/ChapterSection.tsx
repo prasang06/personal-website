@@ -28,8 +28,8 @@ interface ChapterSectionProps {
  */
 const DECK_TOP = 104;
 const DECK_PEEK = 84;
-const DECK_TOP_MOBILE = "46vh";
-const DECK_PEEK_MOBILE = 64;
+const DECK_TOP_MOBILE = "40vh";
+const DECK_PEEK_MOBILE = 80;
 /** Heading landings: desktop px, phones below the visual. */
 const HEADING_MOBILE = "44vh";
 
@@ -84,7 +84,9 @@ export default function ChapterSection({
             header visible. Markers record each card's resting position so the
             scroll can land on it (see SmoothScroll). */}
         <div className="relative mt-16">
-          <h3 className="sticky top-[calc(var(--deck-top)-40px)] z-10 bg-gradient-to-b from-void via-void to-transparent pt-3 pb-4 text-[10px] tracking-[0.25em] text-muted">
+          {/* Pinned beside the canvas on desktop; on phones it scrolls away so it
+              can't outlast the cards and float over them. */}
+          <h3 className="z-10 md:sticky md:top-[calc(var(--deck-top)-40px)] bg-gradient-to-b from-void via-void to-transparent pt-3 pb-4 text-[10px] tracking-[0.25em] text-muted">
             SELECTED WORK
           </h3>
           {featured.map((p, i) => {

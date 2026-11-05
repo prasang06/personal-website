@@ -18,8 +18,8 @@
 
 @media (max-width: 767px) {
   :root {
-    --deck-top: 46vh;
-    --deck-peek: 64px;
+    --deck-top: 40vh;
+    --deck-peek: 80px;
   }
 }
 
