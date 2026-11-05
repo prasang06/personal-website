@@ -6,38 +6,22 @@ export interface TimelineEntry {
   kind: "education" | "research" | "achievement" | "leadership" | "event" | "creative";
 }
 
-/** Degree first, then everything else newest first. */
+/**
+ * Chronological, oldest first: schooling, IIT Hyderabad, what happened in
+ * between, Honors, current roles, then what's upcoming.
+ */
 export const timeline: TimelineEntry[] = [
   {
-    when: "2024 – 2028",
-    title: "B.Tech + Honors, Engineering Physics",
-    detail: "Indian Institute of Technology Hyderabad. B.Tech in Engineering Physics with Honors in Physics.",
+    when: "2022 – 2024",
+    title: "Holy Cross School, Agartala",
+    detail: "Class X (ICSE) 2022 and Class XII (ISC) 2024.",
     kind: "education",
   },
   {
-    when: "Upcoming",
-    title: "Quantum Engineer Intern, Accelequant India Pvt. Ltd.",
-    detail: "Quantum-classical optimisation.",
-    kind: "research",
-  },
-  {
-    when: "Ongoing",
-    title: "Undergraduate Research Assistant, IIT Hyderabad",
-    detail:
-      "With Dr. Sangkha Borah: deep RL with graph-attention policies for sequential optimisation, and a GPU/TPU-accelerated open-quantum-system library in JAX.",
-    kind: "research",
-  },
-  {
-    when: "Oct 2026",
-    title: "Qiskit Fall Fest 2026, IIT Hyderabad",
-    detail: "Organising team: workshops, hackathon and speaker sessions.",
-    kind: "event",
-  },
-  {
-    when: "Aug 2026",
-    title: "IBM Qiskit Global Summer School 2026",
-    detail: "Quantum Excellence badge (Advanced). Ran error-mitigated circuits on IBM hardware.",
-    kind: "achievement",
+    when: "2024",
+    title: "Joined IIT Hyderabad",
+    detail: "B.Tech in Engineering Physics, 2024 – 2028.",
+    kind: "education",
   },
   {
     when: "2026",
@@ -50,6 +34,31 @@ export const timeline: TimelineEntry[] = [
     title: "Head of PRO & Ideation, Institute Technical Council",
     detail: "Ran Tech Expo 2026 end to end and brought the Candlelight Concert to Thrust as its pronite.",
     kind: "leadership",
+  },
+  {
+    when: "Aug 2026",
+    title: "IBM Qiskit Global Summer School 2026",
+    detail: "Quantum Excellence badge (Advanced). Ran error-mitigated circuits on IBM hardware.",
+    kind: "achievement",
+  },
+  {
+    when: "Oct 2026",
+    title: "Qiskit Fall Fest 2026, IIT Hyderabad",
+    detail: "Organising team: workshops, hackathon and speaker sessions.",
+    kind: "event",
+  },
+  {
+    when: "2026",
+    title: "Honors in Physics",
+    detail: "Alongside the B.Tech in Engineering Physics.",
+    kind: "education",
+  },
+  {
+    when: "Current",
+    title: "Undergraduate Research Assistant, IIT Hyderabad",
+    detail:
+      "With Dr. Sangkha Borah: deep RL with graph-attention policies for sequential optimisation, and a GPU/TPU-accelerated open-quantum-system library in JAX.",
+    kind: "research",
   },
   {
     when: "Current",
@@ -68,5 +77,11 @@ export const timeline: TimelineEntry[] = [
     title: "Head, Behind the Lens",
     detail: "IIT Hyderabad's filmmaking club. Film editor for IIT-H at Inter-IIT Cultural Meet 8.0.",
     kind: "creative",
+  },
+  {
+    when: "Upcoming",
+    title: "Quantum Engineer Intern, Accelequant India Pvt. Ltd.",
+    detail: "Quantum-classical optimisation.",
+    kind: "research",
   },
 ];
