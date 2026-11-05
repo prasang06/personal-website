@@ -15,7 +15,7 @@ const display = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "PD_001 — Prasang Das",
+  title: "prasang0 — Prasang Das",
   description:
     "Prasang Das — physics, computation and intelligence. Quantum computing, scientific computing and AI.",
 };

@@ -14,7 +14,7 @@ export default function Navigation() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-30 flex items-start justify-between px-4 py-4 text-xs tracking-[0.18em] sm:px-8 sm:py-6">
+    <header className="fixed inset-x-0 top-0 z-30 flex items-start justify-between bg-gradient-to-b from-void via-void/85 to-transparent px-4 pt-4 pb-8 text-xs tracking-[0.18em] sm:px-8 sm:pt-6">
       <a href="#identity" className="text-bright hover:text-lavender">
         {profile.handle}
         <span className="text-muted"> / PERSONAL INTERFACE</span>

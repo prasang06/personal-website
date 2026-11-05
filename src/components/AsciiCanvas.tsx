@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { morphProgress } from "@/animations/timeline";
 import { ASCIIRenderer } from "@/ascii/ASCIIRenderer";
+import { ChapterScene } from "@/scenes/ChapterScene";
 import { HoodedScene } from "@/scenes/HoodedScene";
 import { loadPortraitScene } from "@/scenes/PortraitScene";
 
@@ -12,6 +14,7 @@ export default function AsciiCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     let renderer: ASCIIRenderer | null = null;
+    let scene: ChapterScene | null = null;
     let cancelled = false;
 
     const fontFamily =
@@ -19,20 +22,36 @@ export default function AsciiCanvas() {
       "monospace";
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Native scroll position is the source of truth for scene progress.
+    const onScroll = () => {
+      if (!scene || !renderer) return;
+      let p = morphProgress(window.scrollY, window.innerHeight);
+      // Without motion, cut between states instead of morphing.
+      if (reducedMotion) p = p > 0.5 ? 1 : 0;
+      scene.setProgress(p);
+      renderer.invalidate();
+    };
+
     // Glyphs are baked into an atlas, so the font must be ready first.
     const font = document.fonts.load(`500 16px ${fontFamily}`).catch(() => undefined);
     // Fall back to the procedural figure if the portrait can't load.
-    const scene = loadPortraitScene().catch(() => new HoodedScene());
+    const portrait = loadPortraitScene().catch(() => new HoodedScene());
 
-    Promise.all([scene, font]).then(([s]) => {
+    Promise.all([portrait, font]).then(([p]) => {
       if (cancelled) return;
+      scene = new ChapterScene(p, reducedMotion);
       renderer = new ASCIIRenderer(canvas, { fontFamily, reducedMotion });
-      renderer.setScene(s);
+      onScroll();
+      renderer.setScene(scene);
       renderer.start();
     });
 
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
       cancelled = true;
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       renderer?.destroy();
     };
   }, []);

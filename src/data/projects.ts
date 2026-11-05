@@ -17,6 +17,8 @@ export interface Project {
   featured: boolean;
   /** Set when the repository belongs to a collaborator. */
   collaboration?: string;
+  /** Code isn't public: shown with a PRIVATE tag and no source link. */
+  private?: boolean;
 }
 
 export const projects: Project[] = [
@@ -107,6 +109,19 @@ export const projects: Project[] = [
     github: "https://github.com/prasang06/Pneumonia-Detection-CNN",
     status: "completed",
     featured: true,
+  },
+  {
+    id: "distributed-agent-system",
+    title: "Distributed Multi-Agent Research System",
+    category: "engineering",
+    summary:
+      "A fully local research and coding assistant: no cloud models, every claim checked against its source.",
+    description:
+      "A terminal coding agent runs on a self-hosted 27B model; an arXiv research agent gathers quoted evidence and verifies every quote against the source PDF before synthesis; a separate architect model plans larger changes and an independent reviewer checks plans, research and code. One command runs plan → approval → tasks → review → report.",
+    technologies: ["Python", "vLLM", "Qwen", "Gemma 4", "OpenCode", "MCP"],
+    status: "active",
+    featured: true,
+    private: true,
   },
   {
     id: "tise-pinn",

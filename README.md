@@ -1,4 +1,4 @@
-# PD_001
+# prasang0
 
 Personal site of Prasang Das: an interactive ASCII portfolio for physics, computation and intelligence.
 

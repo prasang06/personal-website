@@ -40,21 +40,16 @@ export const researchAreas: ResearchArea[] = [
       "A differentiable GPU/TPU library for open quantum systems in JAX, built for pulse optimisation and RL control.",
   },
   {
-    id: "quantum-inspired-optimisation",
-    title: "Quantum-inspired optimisation",
-    category: "physics",
-    summary: "Adaptive hybrid solvers for hard combinatorial optimisation problems.",
+    id: "quantum-optimisation",
+    title: "QUBO & quantum optimisation",
+    category: "quantum",
+    summary:
+      "QUBO formulations, QAOA and quantum-inspired hybrid solvers for hard combinatorial problems such as number partitioning.",
   },
   {
     id: "ai-on-qpus",
     title: "AI on quantum hardware",
     category: "intelligence",
     summary: "How feasible it is to run learning workloads on today's QPUs.",
-  },
-  {
-    id: "multi-agent-systems",
-    title: "Local multi-agent systems",
-    category: "intelligence",
-    summary: "Multi-agent research tooling built on self-hosted LLMs and distributed GPU inference.",
   },
 ];

@@ -1,17 +1,21 @@
 import AsciiCanvas from "@/components/AsciiCanvas";
+import ChapterSection from "@/components/ChapterSection";
 import Navigation from "@/components/Navigation";
+import SmoothScroll from "@/components/SmoothScroll";
 import StatusBar from "@/components/StatusBar";
 import { profile } from "@/data/profile";
 
 export default function Home() {
   return (
     <>
+      <SmoothScroll />
       <AsciiCanvas />
       <Navigation />
 
       <main>
         <section
           id="identity"
+          data-chapter="00 / IDENTITY"
           className="relative flex min-h-dvh flex-col justify-end px-4 pb-10 sm:px-8 sm:pb-24"
         >
           <p
@@ -57,9 +61,53 @@ export default function Home() {
             </p>
           </div>
         </section>
+
+        {/* Scroll room for the portrait-to-sphere morph; see animations/timeline.ts. */}
+        <div aria-hidden="true" className="h-[90vh]" />
+
+        <ChapterSection
+          id="quantum"
+          snapHeading={false}
+          index="01"
+          label="Quantum"
+          category="quantum"
+          heading="Quantum"
+          intro="Variational algorithms, quantum dynamics, optimisation and learning on quantum states: building the simulators and circuits myself, then asking what they can solve and learn."
+          topics={["VQE / VQC", "QUBO / QAOA", "Qubit dynamics", "Error mitigation", "ZX-calculus", "QeMCMC"]}
+        />
+
+        <ChapterSection
+          id="physics"
+          index="02"
+          label="Physics"
+          category="physics"
+          heading="Physics"
+          intro="Numerical methods for physical systems: exact diagonalisation, physics-informed networks and stable long-time field evolution, checked against the analytic answer wherever one exists."
+          topics={["Exact diagonalisation", "Statistical mechanics", "PINNs", "PDE solvers", "Open quantum systems"]}
+        />
+
+        <ChapterSection
+          id="intelligence"
+          index="03"
+          label="Intelligence"
+          category="intelligence"
+          heading="Intelligence"
+          intro="Learning systems for science: graph neural networks, retrieval over the research literature, reinforcement learning and models whose decisions can be inspected."
+          topics={["GNNs", "RAG", "Reinforcement learning", "Transformers", "Computer vision"]}
+        />
+
+        <ChapterSection
+          id="engineering"
+          index="04"
+          label="Engineering"
+          category="engineering"
+          heading="Engineering"
+          intro="The infrastructure underneath: self-hosted LLMs, GPU inference and the tooling that ties models, papers and code together."
+          topics={["Distributed inference", "vLLM", "CUDA / HPC", "Linux", "MCP"]}
+        />
       </main>
 
-      <StatusBar chapter="00 / IDENTITY" />
+      <StatusBar />
     </>
   );
 }

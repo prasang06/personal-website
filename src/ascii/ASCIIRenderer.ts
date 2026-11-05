@@ -23,6 +23,9 @@ const GLYPH_INDEX = new Map(GLYPHS.map((g, i) => [g, i]));
 const RAMP_GLYPH = Array.from(RAMP, (ch) => (ch === " " ? -1 : GLYPH_INDEX.get(ch)!));
 const GLITCH_GLYPH = Array.from(GLITCH, (ch) => GLYPH_INDEX.get(ch)!);
 
+/** Atlas index for a character, or -1 if it isn't in the atlas. */
+export const glyphIndex = (ch: string) => GLYPH_INDEX.get(ch) ?? -1;
+
 // Cell height relative to width; monospace advance is ~0.6em.
 const CELL_ASPECT = 1 / 0.6;
 // Cell size multipliers for dynamic resolution, from best to cheapest.
@@ -99,6 +102,12 @@ export class ASCIIRenderer {
 
   start() {
     this.running = true;
+    this.kick();
+  }
+
+  /** Request a redraw, e.g. after external state such as scroll progress changed. */
+  invalidate() {
+    this.lastDraw = 0;
     this.kick();
   }
 
@@ -228,8 +237,11 @@ export class ASCIIRenderer {
 
     const t = this.elapsed();
     const reduced = !!this.options.reducedMotion;
+    const sceneAnimating = this.scene?.update?.(t) ?? false;
     const animating =
-      !reduced && (t < this.revealEnd + 0.5 || now - this.lastPointerMove < 1200 || this.pointer.strength > 0.01);
+      sceneAnimating ||
+      (!reduced &&
+        (t < this.revealEnd + 0.5 || now - this.lastPointerMove < 1200 || this.pointer.strength > 0.01));
 
     // Idle: flicker only needs a low frame rate. Reduced motion: draw once.
     const due = this.lastDraw === 0 || (!reduced && (animating || now - this.lastDraw >= IDLE_FRAME_MS));
@@ -239,7 +251,7 @@ export class ASCIIRenderer {
       this.lastDraw = now;
       if (animating) this.trackCost(performance.now() - t0);
     }
-    if (!reduced) this.raf = requestAnimationFrame(this.frame);
+    if (!reduced || sceneAnimating) this.raf = requestAnimationFrame(this.frame);
   };
 
   private trackCost(ms: number) {
@@ -328,8 +340,13 @@ export class ASCIIRenderer {
         }
 
         const level = levelOf(lum);
+        const pinned = field.glyph ? field.glyph[si] : -1;
         const glyph =
-          scramble >= 0 && level >= 2 ? GLITCH_GLYPH[scramble] : RAMP_GLYPH[rampIndexOf(level)];
+          pinned >= 0
+            ? pinned
+            : scramble >= 0 && level >= 2
+              ? GLITCH_GLYPH[scramble]
+              : RAMP_GLYPH[rampIndexOf(level)];
         if (glyph < 0) continue;
 
         const set = field.accent[si] ? 1 : 0;
