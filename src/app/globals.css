@@ -30,6 +30,9 @@
 html {
   background: var(--void);
   color-scheme: dark;
+  /* Keep layout width fixed if anything toggles overflow; a shift would
+     resize the canvas and rebuild its grid mid-animation. */
+  scrollbar-gutter: stable;
 }
 
 body {

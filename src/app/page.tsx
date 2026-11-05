@@ -1,4 +1,5 @@
 import AsciiCanvas from "@/components/AsciiCanvas";
+import AboutSection from "@/components/AboutSection";
 import ChapterSection from "@/components/ChapterSection";
 import Navigation from "@/components/Navigation";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -62,12 +63,15 @@ export default function Home() {
           </div>
         </section>
 
+        <AboutSection />
+
         {/* Scroll room for the portrait-to-sphere morph; see animations/timeline.ts. */}
-        <div aria-hidden="true" className="h-[90vh]" />
+        <div aria-hidden="true" className="h-[110vh]" />
 
         <ChapterSection
           id="quantum"
-          snapHeading={false}
+          headingLanding={190}
+          morphTo="qpu"
           index="01"
           label="Quantum"
           category="quantum"

@@ -11,11 +11,13 @@ interface ChapterSectionProps {
   heading: string;
   intro: string;
   topics: string[];
+  /** How far below the viewport top the heading block lands (px). */
+  headingLanding?: number;
   /**
-   * Land on the chapter heading when scrolling stops near it. Off for
-   * chapters whose arrival is already choreographed (Quantum's magnet).
+   * Canvas stage that forms while this chapter's deck is read: it starts
+   * at the first card and is complete by the last.
    */
-  snapHeading?: boolean;
+  morphTo?: string;
 }
 
 /** Where the first stacked card pins, below the fixed nav and the deck label (px). */
@@ -32,7 +34,8 @@ export default function ChapterSection({
   heading,
   intro,
   topics,
-  snapHeading = true,
+  headingLanding = 140,
+  morphTo,
 }: ChapterSectionProps) {
   const featured = projects.filter((p) => p.category === category && p.featured);
   const areas = researchAreas.filter((a) => a.category === category);
@@ -45,7 +48,7 @@ export default function ChapterSection({
       className="relative px-4 pt-[45vh] pb-32 sm:px-8 md:pt-[30vh]"
     >
       <div className="max-w-xl md:w-[46%] md:max-w-none lg:w-[40%]">
-        {snapHeading && <div aria-hidden="true" data-snap={140} />}
+        <div aria-hidden="true" data-snap={headingLanding} data-landing={id} />
         <p className="text-xs tracking-[0.25em] text-muted">
           {index} / {label.toUpperCase()}
         </p>
@@ -75,7 +78,12 @@ export default function ChapterSection({
             const top = DECK_TOP + i * DECK_PEEK;
             return (
               <Fragment key={p.id}>
-                <div aria-hidden="true" data-snap={top} />
+                <div
+                  aria-hidden="true"
+                  data-snap={top}
+                  data-stage-from={morphTo && i === 0 ? morphTo : undefined}
+                  data-stage-to={morphTo && i === featured.length - 1 ? morphTo : undefined}
+                />
                 <div className="sticky" style={{ top }}>
                   <ProjectCard project={p} index={i} />
                 </div>

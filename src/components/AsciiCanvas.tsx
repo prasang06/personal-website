@@ -1,11 +1,18 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { morphProgress } from "@/animations/timeline";
+import { readChoreography } from "@/animations/timeline";
 import { ASCIIRenderer } from "@/ascii/ASCIIRenderer";
-import { ChapterScene } from "@/scenes/ChapterScene";
 import { HoodedScene } from "@/scenes/HoodedScene";
 import { loadPortraitScene } from "@/scenes/PortraitScene";
+import { PortraitStage, QPUStage, SphereStage } from "@/scenes/stages";
+import { StoryScene, type StageStop } from "@/scenes/StoryScene";
+
+/** Where each stage forms, read from markers in the page. */
+function computeStops(): StageStop[] {
+  const { stages } = readChoreography();
+  return [{ start: 0, at: 0 }, stages.sphere, stages.qpu];
+}
 
 export default function AsciiCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,7 +21,7 @@ export default function AsciiCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     let renderer: ASCIIRenderer | null = null;
-    let scene: ChapterScene | null = null;
+    let scene: StoryScene | null = null;
     let cancelled = false;
 
     const fontFamily =
@@ -25,12 +32,16 @@ export default function AsciiCanvas() {
     // Native scroll position is the source of truth for scene progress.
     const onScroll = () => {
       if (!scene || !renderer) return;
-      let p = morphProgress(window.scrollY, window.innerHeight);
-      // Without motion, cut between states instead of morphing.
-      if (reducedMotion) p = p > 0.5 ? 1 : 0;
-      scene.setProgress(p);
+      scene.setScroll(window.scrollY);
       renderer.invalidate();
     };
+    // Markers move when layout changes (fonts, resize, expanding cards).
+    const onLayout = () => {
+      scene?.setStops(computeStops());
+      onScroll();
+    };
+    const layoutObserver = new ResizeObserver(onLayout);
+    layoutObserver.observe(document.body);
 
     // Glyphs are baked into an atlas, so the font must be ready first.
     const font = document.fonts.load(`500 16px ${fontFamily}`).catch(() => undefined);
@@ -39,19 +50,21 @@ export default function AsciiCanvas() {
 
     Promise.all([portrait, font]).then(([p]) => {
       if (cancelled) return;
-      scene = new ChapterScene(p, reducedMotion);
+      scene = new StoryScene(
+        [new PortraitStage(p), new SphereStage(), new QPUStage()],
+        reducedMotion,
+      );
       renderer = new ASCIIRenderer(canvas, { fontFamily, reducedMotion });
-      onScroll();
+      onLayout();
       renderer.setScene(scene);
       renderer.start();
     });
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
     return () => {
       cancelled = true;
+      layoutObserver.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
       renderer?.destroy();
     };
   }, []);

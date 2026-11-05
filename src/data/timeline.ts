@@ -6,8 +6,14 @@ export interface TimelineEntry {
   kind: "education" | "research" | "achievement" | "leadership" | "event" | "creative";
 }
 
-/** Newest first. */
+/** Degree first, then everything else newest first. */
 export const timeline: TimelineEntry[] = [
+  {
+    when: "2024 – 2028",
+    title: "B.Tech + Honors, Engineering Physics",
+    detail: "Indian Institute of Technology Hyderabad. B.Tech in Engineering Physics with Honors in Physics.",
+    kind: "education",
+  },
   {
     when: "Ongoing",
     title: "Undergraduate Research Assistant, IIT Hyderabad",
@@ -26,12 +32,6 @@ export const timeline: TimelineEntry[] = [
     title: "IBM Qiskit Global Summer School 2026",
     detail: "Quantum Excellence badge (Advanced). Ran error-mitigated circuits on IBM hardware.",
     kind: "achievement",
-  },
-  {
-    when: "2026",
-    title: "Smart India Hackathon 2026",
-    detail: "AI-driven interactive platform for learning quantum algorithms.",
-    kind: "event",
   },
   {
     when: "2026",
@@ -62,17 +62,5 @@ export const timeline: TimelineEntry[] = [
     title: "Head, Behind the Lens",
     detail: "IIT Hyderabad's filmmaking club. Film editor for IIT-H at Inter-IIT Cultural Meet 8.0.",
     kind: "creative",
-  },
-  {
-    when: "10th edition",
-    title: "TEDxIITHyderabad",
-    detail: "Under Secretary General; outreach, collaborations and PR.",
-    kind: "leadership",
-  },
-  {
-    when: "2024 – 2028",
-    title: "B.Tech, Engineering Physics",
-    detail: "Indian Institute of Technology Hyderabad. Honors in Physics.",
-    kind: "education",
   },
 ];

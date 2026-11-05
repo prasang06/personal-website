@@ -6,7 +6,7 @@ export const profile = {
   summary:
     "Using computation to understand physical systems, at the intersection of quantum computing, scientific computing and artificial intelligence.",
   education: {
-    degree: "B.Tech, Engineering Physics (Honors in Physics)",
+    degree: "B.Tech + Honors, Engineering Physics",
     institute: "Indian Institute of Technology Hyderabad",
     years: "2024 – 2028",
   },
@@ -37,6 +37,7 @@ export interface Chapter {
 
 export const chapters: Chapter[] = [
   { id: "identity", index: "00", label: "Identity", live: true },
+  { id: "about", index: "--", label: "Now & Timeline", live: true },
   { id: "quantum", index: "01", label: "Quantum", live: true },
   { id: "physics", index: "02", label: "Physics", live: true },
   { id: "intelligence", index: "03", label: "Intelligence", live: true },

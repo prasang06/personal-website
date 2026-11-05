@@ -1,5 +1,6 @@
 import {
   GLITCH,
+  LABEL_CHARS,
   LEVELS,
   RAMP,
   accentAt,
@@ -18,7 +19,7 @@ export interface RendererOptions {
   reducedMotion?: boolean;
 }
 
-const GLYPHS = Array.from(new Set((RAMP + GLITCH).replace(" ", "")));
+const GLYPHS = Array.from(new Set((RAMP + GLITCH + LABEL_CHARS).replace(" ", "")));
 const GLYPH_INDEX = new Map(GLYPHS.map((g, i) => [g, i]));
 const RAMP_GLYPH = Array.from(RAMP, (ch) => (ch === " " ? -1 : GLYPH_INDEX.get(ch)!));
 const GLITCH_GLYPH = Array.from(GLITCH, (ch) => GLYPH_INDEX.get(ch)!);
@@ -166,6 +167,9 @@ export class ASCIIRenderer {
     const cols = Math.ceil(width / cellW);
     const rows = Math.ceil(height / cellH);
     this.grid = { cols, rows, cellW, cellH, width, height };
+    // Exposed for debugging adaptive resolution in devtools.
+    this.canvas.dataset.quality = String(this.quality);
+    this.canvas.dataset.rebuilds = String(Number(this.canvas.dataset.rebuilds ?? 0) + 1);
 
     this.buildAtlas(cellW, cellH);
     this.field = this.scene.build(this.grid);
