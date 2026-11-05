@@ -17,9 +17,9 @@ export default function ConnectSection() {
       id="connect"
       data-chapter="05 / CONNECT"
       aria-labelledby="connect-heading"
-      className="relative flex min-h-dvh flex-col justify-center px-4 pt-[30vh] pb-32 sm:px-8"
+      className="relative flex min-h-dvh flex-col items-center justify-center px-4 pt-[30vh] pb-32 text-center sm:px-8"
     >
-      <div className="max-w-xl md:w-[46%] md:max-w-none lg:w-[40%]">
+      <div className="w-full max-w-xl">
         <div aria-hidden="true" data-snap={140} data-landing="connect" />
         <p className="text-xs tracking-[0.25em] text-muted">05 / CONNECT</p>
         <h2
@@ -37,7 +37,7 @@ export default function ConnectSection() {
                 href={l.href}
                 target={l.href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="group flex items-baseline justify-between gap-6 py-4 text-sm"
+                className="group flex items-baseline justify-between gap-6 py-4 text-left text-sm"
               >
                 <span className="text-[10px] tracking-[0.25em] text-muted">{l.label}</span>
                 <span className="text-lavender group-hover:text-bright">

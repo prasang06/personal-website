@@ -1,8 +1,8 @@
 import { particlesFromField, type PointSet } from "@/ascii/MorphEngine";
 import type { ASCIIScene, GridSpec, LuminanceField } from "@/ascii/types";
+import { BlackHoleScene } from "./BlackHoleScene";
 import { BlochSphere, sphereLayout, type SphereLayout } from "./BlochSphere";
 import { DustScene } from "./DustScene";
-import { LatticeScene } from "./LatticeScene";
 import { NetworkScene } from "./NetworkScene";
 import { QPUChip } from "./QPUChip";
 import { TerminalScene } from "./TerminalScene";
@@ -102,7 +102,7 @@ export const STAGE_ORDER = [
   "portrait",
   "sphere",
   "qpu",
-  "lattice",
+  "blackhole",
   "network",
   "transformer",
   "terminal",
@@ -114,11 +114,15 @@ export function createStages(portrait: ASCIIScene): Stage[] {
   const make: Record<Exclude<StageId, "portrait">, Stage> = {
     sphere: new GeometryStage(sphere),
     qpu: new GeometryStage((l, g) => new QPUChip(l, g.cellW * 0.9)),
-    lattice: new GeometryStage((l, g) => new LatticeScene(l, g.cellW * 0.9)),
+    blackhole: new GeometryStage((l, g) => new BlackHoleScene(l, g.cellW * 0.9)),
     network: new GeometryStage((l, g) => new NetworkScene(l, g.cellW * 0.9)),
     transformer: new GeometryStage((l, g) => new TransformerScene(l, g)),
     terminal: new GeometryStage((l, g) => new TerminalScene(l, g)),
-    dust: new GeometryStage((l) => new DustScene(l)),
+    // The ending is centred on the page, not beside the content column.
+    dust: new GeometryStage(
+      (_, g) =>
+        new DustScene({ cx: g.width / 2, cy: g.height / 2, radius: Math.min(g.width, g.height) * 0.42 }),
+    ),
   };
   return STAGE_ORDER.map((id) => (id === "portrait" ? new PortraitStage(portrait) : make[id]));
 }
