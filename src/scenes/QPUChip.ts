@@ -1,5 +1,6 @@
 import type { PointSet } from "@/ascii/MorphEngine";
 import type { SphereLayout } from "./BlochSphere";
+import type { StageLabel } from "./stages";
 
 /**
  * A superconducting processor in the heavy-hex layout IBM uses: rows of
@@ -206,7 +207,7 @@ export class QPUChip {
     }
   }
 
-  labels() {
+  labels(): StageLabel[] {
     const tmp = new Float32Array(2);
     this.toScreen(-this.halfW, this.halfH + this.d * 0.9, YAW, tmp, 0);
     return [{ text: `HEAVY-HEX ${this.qubits}Q`, x: tmp[0], y: tmp[1] }];

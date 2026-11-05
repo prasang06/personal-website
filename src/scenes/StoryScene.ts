@@ -106,23 +106,23 @@ export class StoryScene implements ASCIIScene {
     field.accent.fill(0);
     if (held) {
       rasterize(held.frame(t, animate), field, grid.cellW, grid.cellH);
-      this.drawLabels(held.labels?.() ?? [], 1);
+      this.drawLabels(held.labels?.(t, animate) ?? [], 1);
       return;
     }
 
     const a = this.stages[from];
     const b = this.stages[to];
     this.morphs[from]?.compose(p, a.frame(t, animate), b.frame(t, animate), field, grid.cellW, grid.cellH);
-    this.drawLabels(a.labels?.() ?? [], Math.max(0, 1 - p / LABEL_FADE));
-    this.drawLabels(b.labels?.() ?? [], Math.max(0, (p - (1 - LABEL_FADE)) / LABEL_FADE));
+    this.drawLabels(a.labels?.(t, animate) ?? [], Math.max(0, 1 - p / LABEL_FADE));
+    this.drawLabels(b.labels?.(t, animate) ?? [], Math.max(0, (p - (1 - LABEL_FADE)) / LABEL_FADE));
   }
 
   /** Pin label text just right of each anchor point. */
   private drawLabels(labels: StageLabel[], alpha: number) {
     const { field, grid } = this;
     if (!field || !grid || alpha <= 0) return;
-    const lum = 0.75 * alpha;
-    for (const { text, x, y } of labels) {
+    for (const { text, x, y, lum: base = 0.75, accent = false } of labels) {
+      const lum = base * alpha;
       const r = Math.floor(y / grid.cellH);
       const c0 = Math.floor(x / grid.cellW) + 2;
       if (r < 0 || r >= grid.rows) continue;
@@ -133,7 +133,7 @@ export class StoryScene implements ASCIIScene {
         // Spaces clear the cell so the label reads cleanly over the scene.
         field.glyph![i] = glyphIndex(ch);
         field.luminance[i] = ch === " " ? 0 : lum;
-        field.accent[i] = 0;
+        field.accent[i] = accent ? 1 : 0;
       });
     }
   }

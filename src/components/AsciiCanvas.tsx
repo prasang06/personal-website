@@ -5,13 +5,12 @@ import { readChoreography } from "@/animations/timeline";
 import { ASCIIRenderer } from "@/ascii/ASCIIRenderer";
 import { HoodedScene } from "@/scenes/HoodedScene";
 import { loadPortraitScene } from "@/scenes/PortraitScene";
-import { PortraitStage, QPUStage, SphereStage } from "@/scenes/stages";
+import { createStages } from "@/scenes/stages";
 import { StoryScene, type StageStop } from "@/scenes/StoryScene";
 
 /** Where each stage forms, read from markers in the page. */
 function computeStops(): StageStop[] {
-  const { stages } = readChoreography();
-  return [{ start: 0, at: 0 }, stages.sphere, stages.qpu];
+  return [{ start: 0, at: 0 }, ...readChoreography().stages];
 }
 
 export default function AsciiCanvas() {
@@ -50,10 +49,7 @@ export default function AsciiCanvas() {
 
     Promise.all([portrait, font]).then(([p]) => {
       if (cancelled) return;
-      scene = new StoryScene(
-        [new PortraitStage(p), new SphereStage(), new QPUStage()],
-        reducedMotion,
-      );
+      scene = new StoryScene(createStages(p), reducedMotion);
       renderer = new ASCIIRenderer(canvas, { fontFamily, reducedMotion });
       onLayout();
       renderer.setScene(scene);

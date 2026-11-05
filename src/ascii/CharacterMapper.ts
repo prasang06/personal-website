@@ -7,7 +7,8 @@ export const RAMP = " .,:;+=*#%@";
 export const GLITCH = "01<>/\\|_-+=*#%@$&?!{}[]";
 
 /** Characters available for pinned labels drawn inside the canvas. */
-export const LABEL_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789|<>/_-.:()";
+export const LABEL_CHARS =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789|<>/_-.,:;()[]&@~$%#\"'!?=+*";
 
 /** Number of discrete brightness levels the atlas is rendered with. */
 export const LEVELS = 32;

@@ -1,6 +1,7 @@
 import AsciiCanvas from "@/components/AsciiCanvas";
 import AboutSection from "@/components/AboutSection";
 import ChapterSection from "@/components/ChapterSection";
+import ConnectSection from "@/components/ConnectSection";
 import Navigation from "@/components/Navigation";
 import SmoothScroll from "@/components/SmoothScroll";
 import StatusBar from "@/components/StatusBar";
@@ -92,6 +93,7 @@ export default function Home() {
 
         <ChapterSection
           id="intelligence"
+          morphTo="transformer"
           index="03"
           label="Intelligence"
           category="intelligence"
@@ -109,6 +111,8 @@ export default function Home() {
           intro="The infrastructure underneath: self-hosted LLMs, GPU inference and the tooling that ties models, papers and code together."
           topics={["Distributed inference", "vLLM", "CUDA / HPC", "Linux", "MCP"]}
         />
+
+        <ConnectSection />
       </main>
 
       <StatusBar />

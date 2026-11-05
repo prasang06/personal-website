@@ -42,5 +42,5 @@ export const chapters: Chapter[] = [
   { id: "physics", index: "02", label: "Physics", live: true },
   { id: "intelligence", index: "03", label: "Intelligence", live: true },
   { id: "engineering", index: "04", label: "Engineering", live: true },
-  { id: "connect", index: "05", label: "Connect", live: false },
+  { id: "connect", index: "05", label: "Connect", live: true },
 ];
