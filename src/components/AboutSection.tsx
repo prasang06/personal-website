@@ -18,7 +18,7 @@ export default function AboutSection() {
       id="about"
       data-chapter="-- / NOW & TIMELINE"
       aria-labelledby="about-heading"
-      className="relative px-4 pt-[40vh] pb-24 sm:px-8 md:pt-[22vh]"
+      className="relative px-4 pt-[40vh] pb-24 sm:px-8 md:pt-[6vh]"
     >
       <div className="max-w-xl md:w-[46%] md:max-w-none lg:w-[40%]">
         <div aria-hidden="true" data-snap={140} data-landing="about" />

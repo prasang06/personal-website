@@ -30,7 +30,7 @@ export default function Home() {
           </p>
 
           {/* Scrim keeps the copy legible where it overlaps the figure on phones. */}
-          <div className="relative max-w-xl before:absolute before:-inset-x-4 before:-inset-y-10 before:-z-10 before:bg-gradient-to-t before:from-void before:via-void/80 before:to-transparent sm:before:hidden">
+          <div className="hero-exit relative max-w-xl before:absolute before:-inset-x-4 before:-inset-y-10 before:-z-10 before:bg-gradient-to-t before:from-void before:via-void/80 before:to-transparent sm:before:hidden">
             <p
               className="rise mb-6 text-xs tracking-[0.25em] text-muted"
               style={{ animationDelay: "1.2s" }}

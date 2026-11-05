@@ -79,10 +79,9 @@ export function readChoreography(): Choreography {
   }
 
   return {
-    zones: [
-      [0, about],
-      [sphereStart, quantum],
-    ],
+    // Only the portrait → sphere stretch glides; intro → Now scrolls freely
+    // (with a soft landing), since nothing on the canvas changes there.
+    zones: [[sphereStart, quantum]],
     stages,
   };
 }

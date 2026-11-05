@@ -83,9 +83,27 @@ body {
   animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
+/* The intro copy fades and lifts as it scrolls away, tied to scroll position
+   (progressive enhancement: browsers without scroll timelines just scroll). */
+@keyframes hero-exit {
+  to {
+    opacity: 0;
+    transform: translateY(-48px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .hero-exit {
+    animation: hero-exit linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 90%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cursor,
-  .rise {
+  .rise,
+  .hero-exit {
     animation: none;
   }
 }
