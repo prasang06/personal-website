@@ -9,5 +9,5 @@ export const now = {
   ],
   /** Shown as a call to action under the list. */
   availability:
-    "Incoming Quantum Engineer Intern at Accelequant. Also open to research internships in quantum computing and scientific ML.",
+    "Incoming Quantum Engineer Intern at Accelequant. Also open to research in quantum computing and scientific ML.",
 };
