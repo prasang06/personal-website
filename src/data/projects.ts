@@ -61,7 +61,7 @@ export const projects: Project[] = [
     summary:
       "Quantum-enhanced Markov chain Monte Carlo for ranking which node to rescue in a network one shock from cascading failure.",
     description:
-      "Systemic-risk networks are modelled as Ising spins near a tipping point. Classical Metropolis freezes in one basin and can rank bailout targets backwards; a Trotterised quantum proposal tunnels between collapse regimes and recovers the susceptibility ranking at a fraction of the iteration budget. Built for the Qollab × IonQ hackathon.",
+      "Systemic-risk networks are modelled as Ising spins near a tipping point. Classical Metropolis freezes in one basin and can rank bailout targets backwards; a Trotterised quantum proposal tunnels between collapse regimes and recovers the susceptibility ranking at a fraction of the iteration budget. Built for the Qollab × IonQ hackathon, where it won Best Documentation and Best Quantum Impact at the local level.",
     technologies: ["Python", "QeMCMC", "Ising models"],
     github: "https://github.com/Sammybro11/network-risk-qemcmc",
     demo: "https://network-risk-qemcmc.vercel.app",

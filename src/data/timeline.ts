@@ -25,12 +25,6 @@ export const timeline: TimelineEntry[] = [
   },
   {
     when: "2026",
-    title: "Qollab × IonQ Hackathon",
-    detail: "Quantum-enhanced MCMC for systemic network risk.",
-    kind: "event",
-  },
-  {
-    when: "2026",
     title: "Head of PRO & Ideation, Institute Technical Council",
     detail: "Ran Tech Expo 2026 end to end and brought the Candlelight Concert to Thrust as its pronite.",
     kind: "leadership",
@@ -46,6 +40,13 @@ export const timeline: TimelineEntry[] = [
     title: "Honors in Physics",
     detail: "Approved alongside the B.Tech in Engineering Physics.",
     kind: "education",
+  },
+  {
+    when: "Oct 2026",
+    title: "Qollab × IonQ Hackathon",
+    detail:
+      "Quantum-enhanced MCMC for systemic network risk. Won Best Documentation and Best Quantum Impact at the local level.",
+    kind: "achievement",
   },
   {
     when: "Oct 2026",
