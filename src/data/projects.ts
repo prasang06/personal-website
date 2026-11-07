@@ -124,6 +124,24 @@ export const projects: Project[] = [
     private: true,
   },
   {
+    id: "tempo",
+    title: "tempo",
+    category: "engineering",
+    summary:
+      "A local-first Pomodoro timer and task manager for the Linux desktop, with small overlay windows that keep running after the main window closes.",
+    description:
+      "A Tauri 2 desktop app: Rust backend, React UI, SQLite with versioned migrations. The timer is a pure state machine in Rust that derives remaining time from wall-clock timestamps instead of counting down, so it survives reloads, restarts and suspend, and every window renders the one state it is sent. Tasks, projects, a weekly planning board and focus analytics sit on top. Built Linux-first with Wayland-aware fallbacks, and shipped to Windows through CI.",
+    technologies: ["Rust", "Tauri 2", "React", "TypeScript", "SQLite", "Zustand", "Tailwind CSS"],
+    highlights: [
+      "Timer state survives restarts and sleep: time is computed from timestamps, never decremented",
+      "Three independent overlay windows kept in sync from a single backend state",
+      "One CI pipeline ships AUR, .deb, .rpm, AppImage and a Windows installer",
+    ],
+    github: "https://github.com/prasang06/tempo",
+    status: "active",
+    featured: true,
+  },
+  {
     id: "tise-pinn",
     title: "PINN Schrödinger Eigensolver",
     category: "physics",
